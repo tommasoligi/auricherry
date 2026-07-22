@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Flash Appuntamenti</title>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:system-ui,sans-serif}
+body{
+    background:#0f172a;
+    color:white;
+    padding:30px;
+}
+
+h1{
+    text-align:center;
+    margin-bottom:25px;
+}
+
+.form{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+    justify-content:center;
+    margin-bottom:30px;
+}
+
+input,button{
+    padding:12px;
+    border:none;
+    border-radius:12px;
+    font-size:16px;
+}
+
+input{
+    background:#1e293b;
+    color:white;
+}
+
+button{
+    background:#3b82f6;
+    color:white;
+    cursor:pointer;
+}
+
+.cards{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+    gap:20px;
+}
+
+.card{
+    background:#1e293b;
+    padding:20px;
+    border-radius:18px;
+    box-shadow:0 10px 30px rgba(0,0,0,.25);
+    transition:.2s;
+}
+
+.card:hover{
+    transform:translateY(-5px);
+}
+
+.card h3{
+    margin-bottom:10px;
+}
+
+.date{
+    color:#60a5fa;
+    margin-bottom:8px;
+}
+
+.note{
+    color:#cbd5e1;
+    margin-bottom:18px;
+}
+
+.delete{
+    width:100%;
+    background:#ef4444;
+}
+</style>
+
+</head>
+<body>
+
+<h1>📅 Flash Appuntamenti</h1>
+
+<div class="form">
+    <input id="titolo" placeholder="Titolo">
+    <input id="data" type="datetime-local">
+    <input id="note" placeholder="Note">
+    <button onclick="aggiungi()">Aggiungi</button>
+</div>
+
+<div class="cards" id="cards"></div>
+
+<script>
+
+let appuntamenti = JSON.parse(localStorage.getItem("agenda")) || [];
+
+function salva(){
+    localStorage.setItem("agenda",JSON.stringify(appuntamenti));
+}
+
+function render(){
+
+    const box=document.getElementById("cards");
+    box.innerHTML="";
+
+    appuntamenti
+    .sort((a,b)=>new Date(a.data)-new Date(b.data))
+    .forEach((a,i)=>{
+
+        box.innerHTML+=`
+        <div class="card">
+            <h3>${a.titolo}</h3>
+            <div class="date">${new Date(a.data).toLocaleString()}</div>
+            <div class="note">${a.note}</div>
+            <button class="delete" onclick="elimina(${i})">Elimina</button>
+        </div>
+        `;
+
+    });
+
+}
+
+function aggiungi(){
+
+    const titolo=document.getElementById("titolo").value;
+    const data=document.getElementById("data").value;
+    const note=document.getElementById("note").value;
+
+    if(!titolo || !data) return alert("Compila titolo e data");
+
+    appuntamenti.push({titolo,data,note});
+
+    salva();
+    render();
+
+    titolo.value="";
+    note.value="";
+}
+
+function elimina(i){
+    appuntamenti.splice(i,1);
+    salva();
+    render();
+}
+
+render();
+
+</script>
+
+</body>
+</html>
