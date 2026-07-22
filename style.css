@@ -1,0 +1,170 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    height:100vh;
+    overflow:hidden;
+    background:linear-gradient(#111827,#312e81);
+    display:flex;
+    justify-content:center;
+    align-items:flex-end;
+}
+
+
+.terra{
+    position:absolute;
+    bottom:0;
+    height:90px;
+    width:100%;
+    background:#14532d;
+}
+
+
+.rosa{
+    position:relative;
+    width:220px;
+    height:450px;
+    animation:salita 2s;
+}
+
+
+/* GAMBO */
+
+.gambo{
+    position:absolute;
+    bottom:80px;
+    left:105px;
+    width:14px;
+    height:280px;
+    background:linear-gradient(90deg,#166534,#4ade80);
+    border-radius:20px;
+}
+
+
+/* FOGLIE */
+
+.foglia{
+    position:absolute;
+    width:90px;
+    height:45px;
+    background:#16a34a;
+}
+
+.sinistra{
+    bottom:190px;
+    left:35px;
+    border-radius:100% 0;
+    transform:rotate(-35deg);
+}
+
+.destra{
+    bottom:130px;
+    left:110px;
+    border-radius:0 100%;
+    transform:rotate(35deg);
+}
+
+
+/* FIORE */
+
+.fiore{
+    position:absolute;
+    top:50px;
+    left:55px;
+    width:120px;
+    height:120px;
+}
+
+
+.petalo{
+    position:absolute;
+    width:80px;
+    height:90px;
+    background:linear-gradient(#fb7185,#9f1239);
+    border-radius:50%;
+    box-shadow:inset -10px -10px 20px #4c0519;
+}
+
+
+.p1{
+    top:0;
+    left:20px;
+}
+
+.p2{
+    top:30px;
+    left:0;
+}
+
+.p3{
+    top:30px;
+    right:0;
+}
+
+.p4{
+    top:45px;
+    left:25px;
+}
+
+
+.p5{
+    top:25px;
+    left:35px;
+    transform:scale(.65);
+    background:#7f1d1d;
+}
+
+
+.centro{
+    position:absolute;
+    width:25px;
+    height:25px;
+    background:#450a0a;
+    border-radius:50%;
+    left:48px;
+    top:55px;
+}
+
+
+/* BOTONE */
+
+button{
+    position:absolute;
+    bottom:30px;
+    padding:15px 25px;
+    border:0;
+    border-radius:30px;
+    background:#e11d48;
+    color:white;
+    font-size:18px;
+    cursor:pointer;
+}
+
+
+/* ANIMAZIONI */
+
+@keyframes apertura{
+    from{
+        transform:scale(.2);
+    }
+    to{
+        transform:scale(1);
+    }
+}
+
+
+@keyframes vento{
+    50%{
+        transform:rotate(5deg);
+    }
+}
+
+
+@keyframes salita{
+    from{
+        transform:translateY(200px);
+    }
+}
